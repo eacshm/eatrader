@@ -9,6 +9,8 @@ class Cliente(models.Model):
     chave = models.TextField()
     data_cadastro = models.BigIntegerField()
 
+    def __str__(self):
+        return self.nome
 
 class Corretora(models.Model):
     descricao = models.TextField()
@@ -20,25 +22,29 @@ class Corretora(models.Model):
     banco_tipo = models.TextField()
     data_cadastro = models.BigIntegerField()
 
+    def __str__(self):
+        return self.descricao
 
 class Operacao(models.Model):
     descricao = models.TextField()
     percentual_bmf = models.FloatField()
     percentual_ir = models.FloatField()
 
+    def __str__(self):
+        return self.descricao
 
 class Lancamento(models.Model):
-    id_cliente = models.ForeignKey(Cliente)
-    id_corretora = models.ForeignKey(Corretora)
-    id_operacao = models.ForeignKey(Operacao)
+    id_cliente = models.ForeignKey(Cliente, on_delete=models.DO_NOTHING)
+    id_corretora = models.ForeignKey(Corretora, on_delete=models.DO_NOTHING)
+    id_operacao = models.ForeignKey(Operacao, on_delete=models.DO_NOTHING)
     data_lancamento = models.BigIntegerField()
     data_pregao = models.BigIntegerField()
     numero_nota = models.BigIntegerField()
-    valor_negocio  models.FloatField()
-    valor_taxa_operacional  models.FloatField()
-    valor_taxa_registro_bmf  models.FloatField()
-    valor_taxa_emolumento_bmf  models.FloatField()
-    valor_iss models.FloatField()
+    valor_negocio = models.FloatField()
+    valor_taxa_operacional = models.FloatField()
+    valor_taxa_registro_bmf = models.FloatField()
+    valor_taxa_emolumento_bmf = models.FloatField()
+    valor_iss = models.FloatField()
 
 
 
